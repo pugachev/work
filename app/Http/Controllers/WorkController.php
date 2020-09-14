@@ -6,13 +6,24 @@ use Illuminate\Http\Request;
 use App\Shohin;
 use App\Http\Requests\PostRequest;
 use DateTime;
+use Illuminate\Support\Facades\Auth;
 
 class WorkController extends Controller
 {
+	public function __construct()
+	{
+	    $this->middleware('auth');
+	    return redirect('/');
+	}
         public function list() 
         {
             $records = Shohin::all();
             return view('work.list')->with('records', $records);
+        }
+        
+        public function logout(){
+            Auth::logout();
+            return redirect('/');
         }
         
         public function create() 

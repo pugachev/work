@@ -41,11 +41,16 @@
                 </button>
                 <div id="menu" class="collapse navbar-collapse">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a href="{{ url('/create') }}" class="nav-link">商品登録</a></li>
-                        <li class="nav-item"><a href="{{ url('/create') }}" class="nav-link">ログアウト</a></li>
-                        <li class="nav-item"><a href="{{ url('/create') }}" data-badge="27" class="notification-badge nav-link">カート</a></li>
+                        <li class="nav-item"><a href="{{ url('create') }}" class="nav-link">商品登録</a></li>
+                        <li class="nav-item"><a href="{{ url('logout') }}" class="nav-link">ログアウト</a></li>
+                        <li class="nav-item"><a href="{{ url('create') }}" data-badge="27" class="notification-badge nav-link">カート</a></li>
                     </ul>
                 </div>
+                @if (Session::has('name'))
+		<div id="sample">
+		    <p>{{ Session::get('name') }}</p>
+		</div>
+		@endif
             </nav>
         </div>
     </header>

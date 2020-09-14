@@ -7,7 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use App\Kokyaku;
+use App\Http\Requests\PostRequest;
 class RegisterController extends Controller
 {
     /*
@@ -63,6 +64,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+    	//名前・email・パスワードが空でなければセッションスタートする
+    	if(!empty($data['name']) && !empty($data['email']) && !empty($data['password'])){
+    		try{
+    		 session_start();
+    		}catch(Exception $ex){}
+    		
+    		session(['name'=>$data['name']]);
+    		session(['email'=>$data['email']]);
+    	}
+        //顧客テーブルへ挿入
+        $record = new Kokyaku();
+        $record->kokyaku_name = $data['name'];
+        $record->post = $data['postnumber'];
+        $record->address=$data['address'];
+        $record->telno=$data['phonenumber'];
+        $record->email=$data['email'];
+        $record->save();
+        
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

@@ -24,7 +24,27 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="postnumber" class="col-md-4 col-form-label text-md-right">PostNumber</label>
 
+                            <div class="col-md-6">
+                                <input id="postnumber" type="text" class="form-control" name="postnumber">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="address" class="col-md-4 col-form-label text-md-right">Address</label>
+
+                            <div class="col-md-6">
+                                <input id="address" type="text" class="form-control" name="address" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="phonenumber" class="col-md-4 col-form-label text-md-right">PhoneNumber</label>
+
+                            <div class="col-md-6">
+                                <input id="phonenumber" type="text" class="form-control" name="phonenumber">
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 

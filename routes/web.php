@@ -19,3 +19,4 @@ Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home', 'WorkController@list');
+Route::get('logout', 'WorkController@logout');
