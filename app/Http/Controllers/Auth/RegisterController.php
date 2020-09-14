@@ -64,7 +64,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-    	//–¼‘OEemailEƒpƒXƒ[ƒh‚ª‹ó‚Å‚È‚¯‚ê‚ÎƒZƒbƒVƒ‡ƒ“ƒXƒ^[ƒg‚·‚é
+    	//åå‰ãƒ»emailãƒ»ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãŒç©ºã§ãªã‘ã‚Œã°ã‚»ãƒƒã‚·ãƒ§ãƒ³ã‚¹ã‚¿ãƒ¼ãƒˆã™ã‚‹
     	if(!empty($data['name']) && !empty($data['email']) && !empty($data['password'])){
     		try{
     		 session_start();
@@ -73,7 +73,7 @@ class RegisterController extends Controller
     		session(['name'=>$data['name']]);
     		session(['email'=>$data['email']]);
     	}
-        //ŒÚ‹qƒe[ƒuƒ‹‚Ö‘}“ü
+        //é¡§å®¢ãƒ†ãƒ¼ãƒ–ãƒ«ã¸æŒ¿å…¥
         $record = new Kokyaku();
         $record->kokyaku_name = $data['name'];
         $record->post = $data['postnumber'];
