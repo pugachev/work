@@ -43,7 +43,7 @@
                     <ul class="navbar-nav">
                         <li class="nav-item"><a href="{{ url('create') }}" class="nav-link">商品登録</a></li>
                         <li class="nav-item"><a href="{{ url('logout') }}" class="nav-link">ログアウト</a></li>
-                        <li class="nav-item"><a href="{{ url('create') }}" data-badge="27" class="notification-badge nav-link">カート</a></li>
+                        <li class="nav-item"><a href="{{ url('create') }}" data-badge="0" class="notification-badge nav-link">カート</a></li>
                     </ul>
                 </div>
                 @if (Session::has('name'))
@@ -65,6 +65,7 @@
                             <th>商品名</th>
                             <th>カテゴリ</th>
                             <th>販売価格</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,7 +75,7 @@
                                 <td>{{$record->shohin_name}}</td>
                                 <td>{{$record->category}}</td>
                                 <td>{{$record->hanbai_tanka}}</td>
-
+                                <td><button type="button" id="btn_{{ $record->shohin_id }}" data-id="{{ $record->shohin_id }}" class="btn btn-success"><span id="btn_inner_{{ $record->shohin_id }}" data-innerid="{{ $record->shohin_id }}">追加</span></button></td>
                             </tr>
                         @empty
                         
@@ -95,7 +96,35 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-    <script src="{{ asset('/js/main.js') }}"></script>
+    <script>
+	(function() {
+	    'use strict';
+	    var cartItems=[];
+	    var itemCnt=0;
+	    var cmds = document.getElementsByClassName('btn');
+	    var i;
+	  
+	    for (i = 0; i < cmds.length; i++) {
+	      cmds[i].addEventListener('click', function(e) {
+	        if($('#btn_inner_'+ this.dataset.id).text()=='追加'){
+	       	 $('#btn_inner_'+ this.dataset.id).text("追加済");
+	       	 cartItems.push(this.dataset.id);
+	       	 itemCnt++;
+	       	 $('.notification-badge').attr('data-badge',itemCnt);
+	        }else{
+	        	$('#btn_inner_'+ this.dataset.id).text("追加");
+	        	cartItems.forEach((item, index) => {
+			    if(item ===  this.dataset.id) {
+			        cartItems.splice(index, 1);
+			        itemCnt--;
+			        $('.notification-badge').attr('data-badge',itemCnt);
+			    }
+			});
+	        }
+	      });
+	    }
+	  })();
+    </script>
 </body>
 
 </html>
