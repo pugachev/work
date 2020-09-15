@@ -43,7 +43,7 @@
                     <ul class="navbar-nav">
                         <li class="nav-item"><a href="{{ url('create') }}" class="nav-link">商品登録</a></li>
                         <li class="nav-item"><a href="{{ url('logout') }}" class="nav-link">ログアウト</a></li>
-                        <li class="nav-item"><a href="{{ url('create') }}" data-badge="0" class="notification-badge nav-link">カート</a></li>
+                        <li class="nav-item"><a href="{{ url('addcart') }}" data-badge="0" id="addcartlink" class="notification-badge nav-link">カート</a></li>
                     </ul>
                 </div>
                 @if (Session::has('name'))
@@ -80,12 +80,15 @@
                         @empty
                         
                         @endforelse
-
                     </tbody>
                 </table>
             </div>
         </section>
-
+        <form method="post" action="{{ url('addcart') }}" id="form_addcart">
+            {{ csrf_field() }}
+            <input type="hidden" value="" id="tagetItems" name="tagetItems">
+            <input type="submit" id="btn_add" style="display:none">
+        </form>
     </main>
     <footer class="fixed-bottom text-center text-muted py-4">
         Copyright 2020-09 mtake.com
@@ -123,6 +126,15 @@
 	        }
 	      });
 	    }
+	    
+	    //カート追加ボタン押下時の処理
+	    $('#addcartlink').on('click', function(e) {
+		  //var tmp = $('.notification-badge').attr('data-badge');
+		  e.preventDefault();
+		  $('#tagetItems').val(cartItems);
+		  $('#btn_add').submit();
+	    });
+	    
 	  })();
     </script>
 </body>

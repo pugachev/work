@@ -30,6 +30,13 @@ class WorkController extends Controller
         {
             return view('work.input');
         }
+        
+        
+         public function addcart(Request $request) 
+        {
+             dd($request);
+             return redirect('/');
+        }
 
         public function store(Request $request) 
         {
